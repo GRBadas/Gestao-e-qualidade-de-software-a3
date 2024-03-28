@@ -26,3 +26,7 @@ jobs:
     - name: Run Unit Tests
       run: mvn test
       continue-on-error: true  # Continue para o próximo passo mesmo se os testes falharem
+
+    # Adicionar etapa para validar os commits com commitlint
+    - name: Validate Commits
+      run: npm run lint-commits
