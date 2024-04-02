@@ -9,30 +9,36 @@ on:
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
-    - name: Build with Maven
-      run: mvn clean install
-      
-    # Adicionando Testes Unitários
-    - name: Run Unit Tests
-      run: mvn test
-      continue-on-error: true  # Continue para o próximo passo mesmo se os testes falharem
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    # Adicionar etapa para validar os commits com commitlint
-    - name: Install Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '14'
-    - name: Install Commitlint
-      run: npm install --save-dev @commitlint/{config-conventional,cli}
-    - name: Validate Commits
-      run: npx commitlint --from=main --to=HEAD
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build with Maven
+        run: mvn clean install
+
+      # Adicionando Testes Unitários
+      - name: Run Unit Tests
+        run: mvn test
+        continue-on-error: true  # Continue para o próximo passo mesmo se os testes falharem
+
+      # Instalar Node.js e Commitlint
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install Commitlint
+        run: npm install --save-dev @commitlint/{config-conventional,cli}
+
+      # Validar commits usando Commitlint
+      - name: Validate Commits
+        run: npx commitlint --from=main --to=HEAD
