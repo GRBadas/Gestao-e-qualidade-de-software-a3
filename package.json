@@ -1,10 +1,9 @@
 {
 	"scripts": {
-    "lint-commits": "commitlint --from=main --to=HEAD"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^19.2.1",
-    "@commitlint/config-conventional": "^19.1.0"
-  }
+		"lint-commits": "commitlint --from=main --to=HEAD"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^19.2.1",
+		"@commitlint/config-conventional": "^19.1.0"
+	}
 }
-
