@@ -28,5 +28,11 @@ jobs:
       continue-on-error: true  # Continue para o próximo passo mesmo se os testes falharem
 
     # Adicionar etapa para validar os commits com commitlint
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+    - name: Install Commitlint
+      run: npm install --save-dev @commitlint/{config-convetional,cli}
     - name: Validate Commits
-      run: npm run lint-commits
+      run: npx commitlint --from=main --to=HEAD
